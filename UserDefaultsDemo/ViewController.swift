@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var switchButton: UISwitch!
     var switchState = true
+    let switchKey = "switchState"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +27,14 @@ class ViewController: UIViewController {
     @IBAction func saveButtonPressed(sender: AnyObject) {
         if self.switchButton.on {
             self.switchState = true
-            NSUserDefaults.standardUserDefaults().boolForKey("switchState")
+            NSUserDefaults.standardUserDefaults().setBool(self.switchState, forKey: switchKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            println(NSUserDefaults.standardUserDefaults().boolForKey(switchKey))
         } else {
             self.switchState = false
+            NSUserDefaults.standardUserDefaults().setBool(self.switchState, forKey: switchKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            println(NSUserDefaults.standardUserDefaults().boolForKey(switchKey))
         }
     }
 
